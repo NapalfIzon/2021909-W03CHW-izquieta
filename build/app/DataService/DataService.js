@@ -3,7 +3,7 @@ class DataService {
     this.url = url;
   }
 
-  async getPokemons() {
+  async getData() {
     const response = await fetch(this.url);
     const pokemons = await response.json();
 
