@@ -2,11 +2,16 @@ import Component from "../Component/Component.js";
 import DataService from "../DataService/DataService.js";
 
 class PokemonFile extends Component {
-  pokemonData;
+  image;
+  name;
+  type0;
+  type1 = null;
+  id;
+  weight;
+  height;
 
   constructor(parentElement, url) {
     super(parentElement, "main__cards__card", "li");
-
     (async () => {
       this.url = url;
       const response = new DataService(url);
