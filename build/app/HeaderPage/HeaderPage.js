@@ -1,8 +1,8 @@
 import Component from "../Component/Component.js";
 
 class HeaderPage extends Component {
-  constructor(parentElement, className, htmlTag, url) {
-    super(parentElement, className, htmlTag);
+  constructor(parentElement, url) {
+    super(parentElement, "header__container", "div");
     this.url = url;
     this.createHeaderIndexHTML();
   }
