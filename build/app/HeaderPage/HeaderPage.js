@@ -2,7 +2,7 @@ import Component from "../Component/Component.js";
 
 class HeaderPage extends Component {
   constructor(parentElement, url) {
-    super(parentElement, "header__container", "div");
+    super(parentElement, "header__container off", "div");
     this.url = url;
     this.createHeaderIndexHTML();
   }
@@ -17,9 +17,8 @@ class HeaderPage extends Component {
         <div class="header__nav__container">
           <nav class="header__nav__menu">
             <ul>
-              <li>Link link 1</li>
-              <li>Link link 2</li>
-              <li>Link link 3</li>
+              <li>Pokemon List</li>
+              <li>My Pokemon</li>
             </ul>
           </nav>
         </div>
@@ -38,6 +37,17 @@ class HeaderPage extends Component {
          </div>
     `;
     this.element.innerHTML = header;
+
+    const menu = this.element.querySelector(".header__nav__burger");
+    const headerContainer = document.querySelector(".header__container");
+
+    menu.addEventListener("click", () => {
+      if (headerContainer.className === "header__container off") {
+        headerContainer.className = "header__container on";
+      } else if (headerContainer.className === "header__container on") {
+        headerContainer.className = "header__container off";
+      }
+    });
   }
 }
 
