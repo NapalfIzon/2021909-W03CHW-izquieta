@@ -9,12 +9,13 @@ class PokemonFile extends Component {
   id;
   weight;
   height;
+  url = "https://pokeapi.co/api/v2/pokemon/";
 
-  constructor(parentElement, url) {
+  constructor(parentElement, idPokemon) {
     super(parentElement, "main__cards__card", "li");
+    this.url += idPokemon;
     (async () => {
-      this.url = url;
-      const response = new DataService(url);
+      const response = new DataService(this.url);
       this.pokemonData = await response.getData();
       this.image =
         this.pokemonData.sprites.other["official-artwork"].front_default;
