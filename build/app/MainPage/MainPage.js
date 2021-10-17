@@ -1,10 +1,12 @@
 import Component from "../Component/Component.js";
+import PokemonFile from "../PokemonFile/PokemonFile.js";
 
 class MainPage extends Component {
-  constructor(parentElement, url) {
+  pokemonApiUrl = "https://pokeapi.co/api/v2/pokemon/";
+  constructor(parentElement) {
     super(parentElement, "main__container", "div");
-    this.url = url;
     this.createMainIndexHTML();
+    this.generatePokemonList();
   }
 
   createMainIndexHTML() {
@@ -28,6 +30,27 @@ class MainPage extends Component {
     `;
 
     this.element.innerHTML = main;
+  }
+
+  generatePokemonList() {
+    const pokemonCardParentElement = this.element.querySelector(
+      ".main__cards__container"
+    );
+
+    for (let id = 1; id < 11; id++) {
+      const pokemonUrl = this.pokemonApiUrl + id;
+      // eslint-disable-next-line no-new
+      new PokemonFile(pokemonCardParentElement, pokemonUrl);
+    }
+
+    setTimeout(() => {
+      for (let i = 0; i < 10; i++) {
+        const dismissButton = document.querySelector(
+          ".main__cards__card__block-A__buttons-dismiss"
+        );
+        dismissButton.remove();
+      }
+    }, 600);
   }
 }
 

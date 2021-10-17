@@ -1,9 +1,11 @@
 import Component from "../Component/Component.js";
+// eslint-disable-next-line import/no-cycle
+import HeaderPokemon from "../HeaderPokemon/HeaderPokemon.js"; //  preguntar en clase
+import MainPokemon from "../MainPokemon/MainPokemon.js";
 
 class HeaderPage extends Component {
-  constructor(parentElement, url) {
+  constructor(parentElement) {
     super(parentElement, "header__container off", "div");
-    this.url = url;
     this.createHeaderIndexHTML();
   }
 
@@ -17,7 +19,6 @@ class HeaderPage extends Component {
         <div class="header__nav__container">
           <nav class="header__nav__menu">
             <ul>
-              <li>Pokemon List</li>
               <li>My Pokemon</li>
             </ul>
           </nav>
@@ -40,6 +41,9 @@ class HeaderPage extends Component {
 
     const menu = this.element.querySelector(".header__nav__burger");
     const headerContainer = document.querySelector(".header__container");
+    const myPokemonLink = this.element.querySelector(".header__nav__menu li");
+    const headerParentElement = document.querySelector(".header");
+    const mainParentElement = document.querySelector(".main");
 
     menu.addEventListener("click", () => {
       if (headerContainer.className === "header__container off") {
@@ -47,6 +51,16 @@ class HeaderPage extends Component {
       } else if (headerContainer.className === "header__container on") {
         headerContainer.className = "header__container off";
       }
+    });
+
+    myPokemonLink.addEventListener("click", () => {
+      const mainContainer = document.querySelector(".main__container");
+      headerContainer.remove();
+      mainContainer.remove();
+      // eslint-disable-next-line no-new
+      new HeaderPokemon(headerParentElement);
+      // eslint-disable-next-line no-new
+      new MainPokemon(mainParentElement);
     });
   }
 }
