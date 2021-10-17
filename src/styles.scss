@@ -8,7 +8,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  overflow-x: hidden;
+  align-items: center;
+  // overflow-x: hidden;
   font-family: "Merriweather Sans", sans-serif;
 }
 
@@ -22,14 +23,75 @@ body {
     rgba(13, 0, 255, 0.9)
   );
   &__container {
+    width: 1200px;
+    padding-left: 15px;
+    padding-right: 15px;
     display: flex;
     justify-content: space-around;
-    width: 1200px;
+    &.on {
+      .header__nav__container {
+        left: 0;
+        right: 0;
+      }
+      .header__nav__burger {
+        div {
+          &:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+          }
+          &:nth-child(2) {
+            opacity: 0;
+          }
+          &:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+          }
+        }
+      }
+    }
   }
   &__nav {
-    width: 40px;
-    height: 40px;
+    &__burger {
+      width: 25px;
+      height: 19px;
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      z-index: 1;
+      position: relative;
+      left: 0;
+      transition: left 0.3s;
+      div {
+        height: 4px;
+        background-color: white;
+        border-radius: 15px;
+        transition: all 0, 3s;
+      }
+    }
+    &__container {
+      background-color: rgba(0, 0, 121, 0.564);
+      color: #fff;
+      position: fixed;
+      top: 0;
+      left: -100vw;
+      right: 100vw;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: left 0.3s, right 0.3s;
+    }
+    &__menu {
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      li {
+        line-height: 32px;
+      }
+    }
   }
+
   &__logo {
     margin: 10px 0;
   }
@@ -42,20 +104,19 @@ body {
 }
 
 .main {
-  width: 1300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  &__container {
+    width: 1300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   &__title {
-    background-color: red;
-    &__text {
-      font-size: xx-large;
-      text-shadow: 1px 1px 2px red, 0 0 1em white, 0 0 0.2em blue;
+    &__logo {
+      margin: 50px 0;
     }
   }
   &__cards {
     width: 100%;
-    background-color: green;
     display: flex;
     justify-content: center;
     &__container {
@@ -67,9 +128,29 @@ body {
     }
     &__card {
       margin: 10px;
-      img {
-        height: 238px;
-        width: 238px;
+      &__block-A {
+        &__image {
+          img {
+            height: 238px;
+            width: 238px;
+          }
+        }
+      }
+      &__block-C {
+        &__catch {
+          &--logo {
+            height: 26px;
+            width: 26px;
+            border-radius: 50%;
+            background: url("../images/pokeball_m.png");
+          }
+          .on {
+            background-color: rgba(0, 0, 255, 0.7);
+          }
+          .off {
+            background-color: rgba(255, 0, 0, 0.7);
+          }
+        }
       }
     }
   }

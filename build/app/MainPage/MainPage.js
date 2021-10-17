@@ -10,7 +10,7 @@ class MainPage extends Component {
   createMainIndexHTML() {
     const main = `
       <div class="main__title">
-        <h2 class="main__title__text">Pokemon List</h2>
+        <img class="main__title__logo" src="./images/pokemon_list.png" alt="Pokemon list">
       </div>
       <div class="main__cards">
         <ul class="main__cards__container"></ul>

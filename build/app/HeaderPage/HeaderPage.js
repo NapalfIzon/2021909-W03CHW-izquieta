@@ -9,15 +9,20 @@ class HeaderPage extends Component {
 
   createHeaderIndexHTML() {
     const header = `
-         <nav class="header__nav">
-           <div class="main__nav__burger">
-             <div></div>
-             <div></div>
-             <div></div>
-           </div>
-           <!--
-           https://codepen.io/mariogl/pen/YzQMXge?editors=1100
-         --></nav>
+        <div class="header__nav__burger">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="header__nav__container">
+          <nav class="header__nav__menu">
+            <ul>
+              <li>Link link 1</li>
+              <li>Link link 2</li>
+              <li>Link link 3</li>
+            </ul>
+          </nav>
+        </div>
          <div class="header__logo">
            <img src="./images/bulbasaur.png" alt="Bulbasaur, I choose you!" />
          </div>
