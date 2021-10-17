@@ -38,6 +38,17 @@ class HeaderPokemon extends Component {
          </div>
     `;
     this.element.innerHTML = header;
+
+    const menu = this.element.querySelector(".header__nav__burger");
+    const headerContainer = document.querySelector(".header__container");
+
+    menu.addEventListener("click", () => {
+      if (headerContainer.className === "header__container off") {
+        headerContainer.className = "header__container on";
+      } else if (headerContainer.className === "header__container on") {
+        headerContainer.className = "header__container off";
+      }
+    });
   }
 }
 

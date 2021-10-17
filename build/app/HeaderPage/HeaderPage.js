@@ -38,10 +38,10 @@ class HeaderPage extends Component {
     `;
     this.element.innerHTML = header;
 
-    const hambugerMenu = this.element.querySelector(".header__nav__burger");
+    const menu = this.element.querySelector(".header__nav__burger");
     const headerContainer = document.querySelector(".header__container");
 
-    hambugerMenu.addEventListener("click", () => {
+    menu.addEventListener("click", () => {
       if (headerContainer.className === "header__container off") {
         headerContainer.className = "header__container on";
       } else if (headerContainer.className === "header__container on") {
