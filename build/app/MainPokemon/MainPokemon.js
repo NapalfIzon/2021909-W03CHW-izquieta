@@ -1,10 +1,14 @@
 import Component from "../Component/Component.js";
+import DataService from "../DataService/DataService.js";
+import PokemonFile from "../PokemonFile/PokemonFile.js";
 
 class MainPokemon extends Component {
-  constructor(parentElement, url) {
+  personalApiUrl = "https://w03chw-pokemon-api.herokuapp.com/pokemon";
+  pokemonApiUrl = "https://pokeapi.co/api/v2/pokemon/";
+  constructor(parentElement) {
     super(parentElement, "main__container", "div");
-    this.url = url;
     this.createMainPokemonHTML();
+    this.generatePokemonList();
   }
 
   createMainPokemonHTML() {
@@ -28,6 +32,34 @@ class MainPokemon extends Component {
     `;
 
     this.element.innerHTML = main;
+    // this.generatePokemonList();
+  }
+
+  generatePokemonList() {
+    const pokemonCardParentElement = this.element.querySelector(
+      ".main__cards__container"
+    );
+
+    (async () => {
+      const response = new DataService(this.personalApiUrl);
+      const pokemonData = await response.getData();
+
+      for (let i = 0; i < pokemonData.length; i++) {
+        const pokemonId = pokemonData[i].idPokemon;
+        const pokemonUrl = this.pokemonApiUrl + pokemonId;
+
+        // eslint-disable-next-line no-new
+        new PokemonFile(pokemonCardParentElement, pokemonUrl);
+      }
+      setTimeout(() => {
+        for (let j = 0; j < pokemonData.length; j++) {
+          const catchButton = document.querySelector(
+            ".main__cards__card__block-C__catch--logo"
+          );
+          catchButton.remove();
+        }
+      }, 500);
+    })();
   }
 }
 

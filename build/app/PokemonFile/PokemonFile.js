@@ -2,6 +2,7 @@ import Component from "../Component/Component.js";
 import DataService from "../DataService/DataService.js";
 
 class PokemonFile extends Component {
+  url;
   image;
   name;
   type0;
@@ -9,25 +10,20 @@ class PokemonFile extends Component {
   id;
   weight;
   height;
-  url = "https://pokeapi.co/api/v2/pokemon/";
   response;
 
-  constructor(parentElement, idPokemon) {
+  constructor(parentElement, url) {
     super(parentElement, "main__cards__card", "li");
-    this.url += idPokemon;
+    this.url = url;
     (async () => {
       this.response = new DataService(this.url);
       this.pokemonData = await this.response.getData();
       this.image =
         this.pokemonData.sprites.other["official-artwork"].front_default;
       this.name = this.pokemonData.name;
-      this.types = {};
-
-      for (let i = 0; i < this.pokemonData.types.length; i++) {
-        const type = `type${i}`;
-        Object.defineProperty(this.types, type, {
-          value: `${this.pokemonData.types[i].type.name}`,
-        });
+      this.type0 = this.pokemonData.types[0].type.name;
+      if (this.pokemonData.types.length > 1) {
+        this.type1 = this.pokemonData.types[1].type.name;
       }
       this.id = this.pokemonData.id;
       this.weight = this.pokemonData.weight;
@@ -47,8 +43,9 @@ class PokemonFile extends Component {
                 />
               </div>
               <div class="main__cards__card__block-A__buttons">
-                <i class="main__cards__card__block-A__buttons-dismiss far fa-times-circle"></i>
                 <i class="main__cards__card__block-A__buttons-info fas fa-info-circle"></i>
+                <i class="main__cards__card__block-A__buttons-dismiss far fa-times-circle"></i>
+                <div class="main__cards__card__block-C__catch--logo off"></div>
               </div>
             </div>
             <div class="main__cards__card__block-B">
@@ -61,12 +58,7 @@ class PokemonFile extends Component {
             </div>
             <div class="main__cards__card__block-C">
               <div class="main__cards__card__block-C__type">
-                <div class="main__cards__card__block-C__type-01">${this.types.type0}</div>
-                <!-- mirar para tipos múltiples-->
-              </div>
-              <div class="main__cards__card__block-C__catch">
-                <div class="main__cards__card__block-C__catch--logo off"></div>
-                <!-- ha de ser on / off / catched-->
+                <div class="main__cards__card__block-C__type-01">${this.type0}</div>
               </div>
             </div>
     `;

@@ -33,5 +33,7 @@
     "jest": "^27.2.5",
     "sass": "^1.43.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "figlet-cli": "^0.1.1"
+  }
 }
