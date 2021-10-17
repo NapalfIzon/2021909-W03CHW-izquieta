@@ -10,13 +10,14 @@ class PokemonFile extends Component {
   weight;
   height;
   url = "https://pokeapi.co/api/v2/pokemon/";
+  response;
 
   constructor(parentElement, idPokemon) {
     super(parentElement, "main__cards__card", "li");
     this.url += idPokemon;
     (async () => {
-      const response = new DataService(this.url);
-      this.pokemonData = await response.getData();
+      this.response = new DataService(this.url);
+      this.pokemonData = await this.response.getData();
       this.image =
         this.pokemonData.sprites.other["official-artwork"].front_default;
       this.name = this.pokemonData.name;
@@ -70,6 +71,20 @@ class PokemonFile extends Component {
             </div>
     `;
     this.element.innerHTML = card;
+
+    const pokeballCatch = this.element.querySelector(
+      ".main__cards__card__block-C__catch--logo"
+    );
+
+    pokeballCatch.addEventListener("click", () => {
+      (async () => {
+        const pokemonData = {
+          idPokemon: `${this.id}`,
+          namePokemon: `${this.name}`,
+        };
+        await this.response.addData(pokemonData);
+      })();
+    });
   }
 }
 
