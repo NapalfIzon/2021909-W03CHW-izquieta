@@ -1,5 +1,6 @@
 import Component from "../Component/Component.js";
 import DataService from "../DataService/DataService.js";
+import Pokedex from "../Pokedex/Pokedex.js";
 import PokemonFile from "../PokemonFile/PokemonFile.js";
 
 class MainPokemon extends Component {
@@ -39,6 +40,7 @@ class MainPokemon extends Component {
     const pokemonCardParentElement = this.element.querySelector(
       ".main__cards__container"
     );
+    const pokedexContainer = document.querySelector(".pokedexContainer");
 
     (async () => {
       const response = new DataService(this.personalApiUrl);
@@ -54,10 +56,13 @@ class MainPokemon extends Component {
       setTimeout(() => {
         for (let j = 0; j < pokemonData.length; j++) {
           const catchButton = document.querySelector(
-            ".main__cards__card__block-C__catch--logo"
+            ".main__cards__card__block-A__catch--logo"
           );
           catchButton.remove();
         }
+
+        // eslint-disable-next-line no-new
+        new Pokedex(pokedexContainer);
       }, 500);
     })();
   }

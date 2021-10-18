@@ -1,5 +1,6 @@
 import Component from "../Component/Component.js";
 import DataService from "../DataService/DataService.js";
+import Pokedex from "../Pokedex/Pokedex.js";
 
 class PokemonFile extends Component {
   url;
@@ -30,6 +31,7 @@ class PokemonFile extends Component {
       this.height = this.pokemonData.height;
 
       this.createHTML();
+      this.createPokedex();
     })();
   }
 
@@ -45,7 +47,7 @@ class PokemonFile extends Component {
               <div class="main__cards__card__block-A__buttons">
                 <i class="main__cards__card__block-A__buttons-info fas fa-info-circle"></i>
                 <i class="main__cards__card__block-A__buttons-dismiss far fa-times-circle"></i>
-                <div class="main__cards__card__block-C__catch--logo off"></div>
+                <div class="main__cards__card__block-A__catch--logo"></div>
               </div>
             </div>
             <div class="main__cards__card__block-B">
@@ -56,16 +58,11 @@ class PokemonFile extends Component {
                 <p class="main__cards__card__block-B__name-text">${this.name}</p>
               </div>
             </div>
-            <div class="main__cards__card__block-C">
-              <div class="main__cards__card__block-C__type">
-                <div class="main__cards__card__block-C__type-01">${this.type0}</div>
-              </div>
-            </div>
     `;
     this.element.innerHTML = card;
 
     const pokeballCatch = this.element.querySelector(
-      ".main__cards__card__block-C__catch--logo"
+      ".main__cards__card__block-A__catch--logo"
     );
 
     pokeballCatch.addEventListener("click", () => {
@@ -76,6 +73,20 @@ class PokemonFile extends Component {
         };
         await this.response.addData(pokemonData);
       })();
+    });
+  }
+
+  createPokedex() {
+    const infoContainer = this.element.querySelector(
+      ".main__cards__card__block-A__buttons-info"
+    );
+    const pokedexContainer = document.querySelector(".pokedexContainer");
+
+    // eslint-disable-next-line no-new
+    new Pokedex(pokedexContainer);
+
+    infoContainer.addEventListener("click", () => {
+      pokedexContainer.className = "pokedexContainer";
     });
   }
 }

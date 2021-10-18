@@ -1,4 +1,5 @@
 import Component from "../Component/Component.js";
+import Pokedex from "../Pokedex/Pokedex.js";
 import PokemonFile from "../PokemonFile/PokemonFile.js";
 
 class MainPage extends Component {
@@ -36,6 +37,7 @@ class MainPage extends Component {
     const pokemonCardParentElement = this.element.querySelector(
       ".main__cards__container"
     );
+    const pokedexContainer = document.querySelector(".pokedexContainer");
 
     for (let id = 1; id < 11; id++) {
       const pokemonUrl = this.pokemonApiUrl + id;
@@ -50,7 +52,10 @@ class MainPage extends Component {
         );
         dismissButton.remove();
       }
-    }, 600);
+
+      // eslint-disable-next-line no-new
+      // new Pokedex(pokedexContainer);
+    }, 500);
   }
 }
 
